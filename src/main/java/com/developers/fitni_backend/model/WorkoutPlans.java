@@ -13,7 +13,7 @@ public class WorkoutPlans {
     private String id;
 
     @ManyToOne
-    private Athlete athlete;
+    private User athlete;
 
     private String title;
     private String level;

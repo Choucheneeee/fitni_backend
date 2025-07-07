@@ -12,7 +12,7 @@ public class ProgressTracking {
     @Id
     private String id;
 
-    private Athlete athleteId;
+    private User athleteId;
     private Float weight;
     private Float bodyFatPercent;
     private Float muscleMass;
