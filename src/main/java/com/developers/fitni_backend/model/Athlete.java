@@ -1,29 +1,26 @@
 package com.developers.fitni_backend.model;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import lombok.Data;
+import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.Document;
 
-@Entity
+@Document(collection = "athlete")
+@Data
 public class Athlete {
+
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private String id;
+
     private String firstname;
     private String lastname;
     private String email;
     private String tel;
     private String address;
     private String password;
-    private String age;
+    private Integer age;
     private String gender;
     private Float weight;
     private Float height;
     private String profilePicture;
-    private String activity_level;
-
-
+    private String activityLevel;
 }
-
-
-
