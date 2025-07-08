@@ -3,12 +3,16 @@ package com.developers.fitni_backend.service;
 import com.developers.fitni_backend.model.User;
 import com.developers.fitni_backend.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
 @Service
 public class UserService {
+
+    private BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+
 
     @Autowired
     private UserRepository userRepository;
@@ -17,6 +21,7 @@ public class UserService {
         if (userRepository.existsByEmail(user.getEmail())) {
             throw new RuntimeException("Email already registered.");
         }
+        user.setPassword(passwordEncoder.encode(user.getPassword()));
 
         return userRepository.save(user);
     }
