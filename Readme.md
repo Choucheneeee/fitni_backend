@@ -71,7 +71,7 @@ This project is exclusively maintained by:
 - Sami Abdelhafidh
 - Chouchene Med Amine
 
-© 2024 Fitni Development Team. All rights reserved.
+© 2025 Fitni Development Team. All rights reserved.
 
 ## Contact
 
