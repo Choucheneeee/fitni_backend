@@ -1,0 +1,8 @@
+target/
+!target/fitni_backend-0.0.1-SNAPSHOT.jar
+.git
+.gitignore
+Dockerfile
+README.md
+
+dockerCom.md
