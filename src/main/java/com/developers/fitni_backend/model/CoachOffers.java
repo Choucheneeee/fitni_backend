@@ -13,7 +13,7 @@ public class CoachOffers {
     @Id
     private String id;
 
-    private Coach coachId;
+    private User coach;
     private String title;
     private String description;
     private Double price;

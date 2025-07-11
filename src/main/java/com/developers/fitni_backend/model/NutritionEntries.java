@@ -16,7 +16,7 @@ public class NutritionEntries {
     private String id;
 
     @ManyToOne
-    private Athlete athlete;
+    private User athlete;
 
     private String foodName;
     private Integer calories;

@@ -10,4 +10,5 @@ public class FitniBackendApplication {
 		SpringApplication.run(FitniBackendApplication.class, args);
 	}
 
+
 }
