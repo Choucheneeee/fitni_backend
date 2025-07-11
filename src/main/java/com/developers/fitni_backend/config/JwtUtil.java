@@ -2,14 +2,12 @@ package com.developers.fitni_backend.config;
 
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
-import io.jsonwebtoken.security.Keys;
 import jakarta.annotation.PostConstruct;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
 import javax.crypto.spec.SecretKeySpec;
 import java.security.Key;
-import java.util.Base64;
 import java.util.Date;
 
 @Component
@@ -20,30 +18,44 @@ public class JwtUtil {
 
     private Key key;
 
-    private final long EXPIRATION_TIME = 86400000; // 1 day
+    private final long EXPIRATION_TIME = 86400000L; // 1 day in milliseconds
 
-    // ⬇️ Initialiser la clé juste après l'injection de `secret`
     @PostConstruct
     public void init() {
-        byte[] secretBytes = Base64.getEncoder().encode(secret.getBytes());
+        // Use raw secret bytes directly without encoding/decoding
+        byte[] secretBytes = secret.getBytes();
         this.key = new SecretKeySpec(secretBytes, SignatureAlgorithm.HS256.getJcaName());
     }
 
-    public String generateToken(String email) {
+    public String generateToken(String userId, String role) {
+        long nowMillis = System.currentTimeMillis();
+        Date now = new Date(nowMillis);
+        Date expiryDate = new Date(nowMillis + EXPIRATION_TIME);
+
         return Jwts.builder()
-                .setSubject(email)
-                .setIssuedAt(new Date())
-                .setExpiration(new Date(System.currentTimeMillis() + EXPIRATION_TIME))
+                .setSubject(userId)
+                .claim("role", role)
+                .setIssuedAt(now)
+                .setExpiration(expiryDate)
                 .signWith(key)
                 .compact();
     }
 
-    public String extractEmail(String token) {
+    public String extractUserId(String token) {
         return Jwts.parserBuilder()
                 .setSigningKey(key)
                 .build()
                 .parseClaimsJws(token)
                 .getBody()
                 .getSubject();
+    }
+
+    public String extractRole(String token) {
+        return (String) Jwts.parserBuilder()
+                .setSigningKey(key)
+                .build()
+                .parseClaimsJws(token)
+                .getBody()
+                .get("role");
     }
 }

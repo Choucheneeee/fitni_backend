@@ -28,6 +28,10 @@ public class LoginService {
             throw new RuntimeException("Wrong email or password");
         }
 
-        return jwtUtil.generateToken(existingUser.getEmail());
+        return jwtUtil.generateToken(
+                existingUser.getId(),          // Use ID as subject
+                existingUser.getRole()         // Add role as claim
+        );
     }
+
 }
