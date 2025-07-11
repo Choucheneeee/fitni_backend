@@ -1,6 +1,8 @@
 package com.developers.fitni_backend.controller;
 import com.developers.fitni_backend.model.User;
+import com.developers.fitni_backend.service.LoginService;
 import com.developers.fitni_backend.service.UserService;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -12,16 +14,11 @@ import java.util.Optional;
 public class LoginController {
 
     @Autowired
-    private UserService userService;
+    private LoginService loginService;
 
     @PostMapping("/login")
-    public ResponseEntity<?> login(@RequestBody User loginRequest) {
-        Optional<User> user = userService.login(loginRequest.getEmail(), loginRequest.getPassword());
+    public String login(@RequestBody User user)
+    {return loginService.login(user);}
 
-        if (user.isPresent()) {
-            return ResponseEntity.ok(user.get());
-        } else {
-            return ResponseEntity.status(401).body("Email ou mot de passe incorrect");
-        }
-    }
+
     }
