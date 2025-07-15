@@ -2,12 +2,14 @@ package com.developers.fitni_backend.config;
 
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
+import io.jsonwebtoken.security.Keys;
 import jakarta.annotation.PostConstruct;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
 import javax.crypto.spec.SecretKeySpec;
 import java.security.Key;
+import java.util.Base64;
 import java.util.Date;
 
 @Component
@@ -18,12 +20,12 @@ public class JwtUtil {
 
     private Key key;
 
-    private final long EXPIRATION_TIME = 86400000L; // 1 day in milliseconds
+    private final long EXPIRATION_TIME = 86400000; // 1 day
 
+    // ⬇️ Initialiser la clé juste après l'injection de `secret`
     @PostConstruct
     public void init() {
-        // Use raw secret bytes directly without encoding/decoding
-        byte[] secretBytes = secret.getBytes();
+        byte[] secretBytes = Base64.getEncoder().encode(secret.getBytes());
         this.key = new SecretKeySpec(secretBytes, SignatureAlgorithm.HS256.getJcaName());
     }
 
@@ -49,7 +51,6 @@ public class JwtUtil {
                 .getBody()
                 .getSubject();
     }
-
     public String extractRole(String token) {
         return (String) Jwts.parserBuilder()
                 .setSigningKey(key)
