@@ -1,5 +1,6 @@
 package com.developers.fitni_backend.service;
 
+import com.developers.fitni_backend.config.JwtUtil;
 import com.developers.fitni_backend.model.User;
 import com.developers.fitni_backend.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,6 +18,8 @@ public class UserService {
     @Autowired
     private UserRepository userRepository;
 
+    @Autowired
+    private JwtUtil jwtUtil;
     public User adduser(User user) {
         if (userRepository.existsByEmail(user.getEmail())) {
             throw new RuntimeException("Email already registered.");
@@ -28,5 +31,14 @@ public class UserService {
 
     public List<User> getAllusers () {
         return userRepository.findAll();
+    }
+
+    public User getUserFromToken(String token) {
+        System.out.println("token: " + token);
+        if (userRepository.existsByEmail(jwtUtil.extractEmail(token))) {
+            return userRepository.findByEmail(jwtUtil.extractEmail(token));
+        }
+        throw new RuntimeException("User not found.");
+
     }
 }

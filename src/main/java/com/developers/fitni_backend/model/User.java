@@ -1,5 +1,6 @@
 package com.developers.fitni_backend.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotBlank;
@@ -32,6 +33,7 @@ public class User {
     @NotBlank(message = "Address is required.")
     private String address;
 
+    @JsonIgnore
     @NotBlank(message = "Password is required.")
     private String password;
 
@@ -57,4 +59,5 @@ public class User {
     private String certification;
     private String specialities;
     private String price;
+
 }
