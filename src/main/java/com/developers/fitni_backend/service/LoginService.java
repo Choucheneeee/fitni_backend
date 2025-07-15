@@ -29,8 +29,8 @@ public class LoginService {
         }
 
         return jwtUtil.generateToken(
-                existingUser.getId(),          // Use ID as subject
-                existingUser.getRole()         // Add role as claim
+                existingUser.getId(),
+                existingUser.getRole()
         );
     }
 
