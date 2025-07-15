@@ -1,5 +1,6 @@
 package com.developers.fitni_backend.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotBlank;
@@ -57,4 +58,5 @@ public class User {
     private String certification;
     private String specialities;
     private String price;
+
 }
