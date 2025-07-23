@@ -12,9 +12,6 @@ public class WorkoutPlans {
     @Id
     private String id;
 
-    @ManyToOne
-    private User athlete;
-
     private String title;
     private String level;
     private Integer durationWeeks;
