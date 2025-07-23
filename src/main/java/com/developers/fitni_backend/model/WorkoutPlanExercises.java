@@ -1,3 +1,9 @@
+// This model represents the individual exercises assigned to a workout plan.
+// It connects a specific exercise to a workout plan, including metadata like
+// the day number, order of execution, sets, reps, and notes.
+// Think of this as the detailed breakdown of what to do on each day within a plan.
+
+
 package com.developers.fitni_backend.model;
 
 import jakarta.persistence.ManyToOne;

@@ -1,3 +1,7 @@
+// This model represents a high-level workout plan created for an athlete.
+// It defines the overall program structure such as its goal, difficulty level, duration, etc.
+// A workout plan is made up of multiple exercises distributed across days.
+
 package com.developers.fitni_backend.model;
 
 

@@ -18,8 +18,7 @@ public class WorkoutPlansService {
     @Autowired
     private WorkoutPlansRepository workoutPlansRepository;
 
-    @Autowired
-    private UserRepository userRepository;
+
 
     public WorkoutPlans createPlan(WorkoutPlans dto) {
 
